@@ -1,0 +1,523 @@
+<html>
+    <head>
+        <title>OWASP Top 10: The Risk of Cryptographic Failures</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <style>
+            body {
+                font-family: monospace;
+                background-color: black;
+                color: white;
+                font-size: 20px;}
+            a {
+                text-decoration: none;
+                color: white}
+            img {margin: 0 auto;}
+            .headerLogo {
+                font-family: "Major Mono Display", monospace;
+                font-weight: 400;
+                font-style: normal;}
+            #posts {
+                display: grid;
+                grid-template-columns: 2fr 1fr;
+                grid-template-rows: 1fr ;
+                grid-column-gap: 20px;
+                grid-row-gap: 20px;}
+            #postsMain {
+                padding: 6px 10px;}
+            div.post {
+                display: grid;
+                grid-template-columns: 1fr 2fr;
+                grid-template-rows: 1fr;
+                grid-column-gap: 20px;
+                grid-row-gap: 20px;
+                margin-bottom: 20px;}
+            div.comment {
+                display: grid;
+                grid-template-columns: 1fr 6fr;
+                grid-template-rows: 1fr;
+                grid-column-gap: 0px;
+                margin-bottom: 20px;}
+            footer {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                grid-template-rows: 1fr;
+                grid-column-gap: 15px;}
+            footer {text-align: center;}
+            .footerLink, .navLink {color: #fff;}
+            .navLink {padding: 8px 8px;}
+            .navLink:hover {background-color: #333;}
+            #promotion {
+                border: 1px solid #ddd;
+                padding: 15px;
+                margin-top: 28px;
+                text-align: center;
+                position: relative;
+            }
+            @keyframes blink {
+                0% {opacity: 1;}
+                50% {opacity: 0;}
+                100% {opacity: 1;}}
+            blink {
+                text-align: center;
+                animation: blink 1.5s infinite;}
+            .floatingStar {
+                position: absolute;
+                top: -28;
+                left: -28;
+                background-color: #f00;
+                color: yellow;
+                padding: 12px;
+                border-radius: 50%;
+                transform: rotate(-15deg);
+                transform-origin: center center;
+            }
+        </style>
+        <center><h1 class="headerLogo">HackerUtopia</h1></center>
+        <div style="margin: 10 200  0; font-size: 18px;">
+                <a href="./index.html" class="navLink">Home</a>
+                <a href="#" class="navLink">About Us</a>
+                <a href="#" class="navLink">Career</a>
+                <a href="./contactus.html" class="navLink">Contact Us</a>
+        </div>
+        <hr margin="0">
+        <marquee>Welcome to the Official site of "HackerUtopia".</marquee>
+        <br>
+        <div style="margin: 0 400;">
+            <div style="margin-top: 10px">
+                <span style="margin: 25px 0px 0px"><a href="/index.html">Home</a> > <a href="#">Blog</a> > OWASP Top 10: The Risk of Cryptographic Failures</span>
+                <h1 style="margin: 10px 0px">OWASP Top 10: The Risk of Cryptographic Failures</h1>
+                <span style="margin: 10px 0px">By Nitin Bhatt - October 21st, 2024</span><br>
+                <center><img src="https://www.hackerone.com/sites/default/files/styles/blog_header_mobile/public/2024-10/cryptographic%20failures%20blog%20header%402x.png.webp?itok=yLtbeJmC" style="margin: 10px 0px 0px"></center>
+                <p>Cryptographic failures represent a class of vulnerabilities that impact data security during storage, transmission, and usage. As noted by the <a href="https://owasp.org/www-project-top-ten/" target="_blank">OWASP Top 10</a>, these vulnerabilities are particularly concerning because they can result in the unintended exposure of sensitive data, such as credentials, credit card numbers, and personal information. When cryptographic systems fail to provide their intended protection, opportunities arise for gaining unauthorized access to this data.
+                    <h2 dir="ltr">What Is Cryptography?</h2>
+                    <p dir="ltr">Cryptography is the practice and study of techniques for securing communication and information by transforming it into a format that is unreadable to unauthorized users. When sufficient cryptographic measures are in place, even if an unwanted third party did gain access to protected data, they would not be able to decipher it.</p>
+                    <p dir="ltr">This field of science has historically been a source of political contention. During World War II, a British mathematician named Alan Turing, was a key figure in cracking the&nbsp; <a href="https://www.cia.gov/stories/story/the-enigma-of-alan-turing/#:~:text=In%201939%2C%20Turing%20created%20a,%2C%20espionage%2C%20and%20sabotage%20activities." target="_blank">ENIGMA code</a>. The ENIGMA was a machine used by the German military to send cryptological messages to advance their war effort. Due to this, Turing’s work is credited as a vital component of ending the war. Turing also went on to become one of the major drivers of what would eventually become the modern-day computer we are familiar with today. </p>
+                    <p dir="ltr">Additionally, the creator of&nbsp; <strong>Pretty Good Privacy</strong> ( <strong>PGP</strong>),&nbsp; <a href="https://hiddenheroes.netguru.com/philip-zimmermann#:~:text=But%20then%20matters%20took%20a,being%20an%20illicit%20arms%20dealer." target="_blank">Philip Zimmermann</a> was subjected to a criminal investigation headed by the United States Customs Service. PGP, a cryptographic security program that is still widely used to this day, was considered to be too strong of an algorithm for export from the United States. The U.S. government, fearful that its enemies would use PGP, alleged that it violated the Arms Export Control Act – the same law that governs the export of weapons such as machine guns and missile systems. Ultimately, the&nbsp; <strong>Massachusetts Institute of Technology</strong> ( <strong>MIT</strong>) came to Zimmermann’s aid and published a book that included PGP code to make the point that if he was truly an illegal arms dealer, then so was the university. </p>
+                    <h2 dir="ltr">Encryption &amp; Decryption</h2>
+                    <p dir="ltr">When data is encrypted, human-readable&nbsp; <strong>plaintext</strong>, such as the sentence you are currently reading, is converted into what is known as&nbsp; <strong>ciphertext</strong>. Ciphertext is an unreadable, scrambled version of the original plaintext. This is achieved by utilizing mathematical formulas, known as&nbsp; <strong>algorithms</strong>, that rely on what are referred to as&nbsp; <strong>keys</strong>. Keys are essentially passwords that are used by cryptographic algorithms to convert plaintext into ciphertext. Keys are also used in the process of reverting ciphertext back into its original plaintext, known as&nbsp; <strong>decryption</strong>. </p>
+                    <p dir="ltr">As an example, the string “Hello, World!”, when encrypted with the&nbsp; <strong>Advanced Encryption Standard with a 256-bit key</strong> ( <strong>AES-256</strong>) algorithm, and a key string of “secret” returns the following: </p>
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <p>eyJpdiI6Ill3THVuSmxvV0hxRG5GZzN0dWxGY0E9PSIsCiJ2Ijox <br>LAoiaXRlciI6MTAwMCwKImtzIjoyNTYsCiJ0cyI6NjQsCiJtb2RlIjoi <br>Y2NtIiwKImFkYXRhIjoiIiwKImNpcGhlciI6ImFlcyIsCiJzYWx0IjoiSm <br>4wQVZNVTBYWkk9IiwKImN0IjoiMjhGdlRxdzNiN0RwMjJRVDFIT <br>2NkajVtbjdTMiJ9 </p>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <p dir="ltr">There are two major types of encryption <strong>.</strong>
+                    </p>
+                    <h3 dir="ltr">1. Symmetric-key encryption</h3>
+                    <p dir="ltr">Also known as “shared key encryption”, both the sender and receiver share the same key. Just as in the example above, the same key is used for both encryption and decryption.</p>
+                    <center><img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXfwA6yynvcdCMACOYlAZJEuxWmSVZrfU015YmbfYiZtTwzLKOd7RuUHgh8uOJwjtHuz7WjC2HcKxKrmwHxlwgHpwlFKq001ekVeC87SSSovBXezZcDKVuqfRdThfkhJUljOH3SvZefH5ikKwpl6gAkyGso?key=es8AQUT2E19zUBwvcqtStQ" width="672" height="504" class="align-center" loading="lazy"></center>
+                    <p dir="ltr">&nbsp;</p>
+                    <h3 dir="ltr">2. Asymmetric-key encryption</h3>
+                    <p dir="ltr">Also known as “public key encryption”, asymmetric-key encryption uses two different keys – a public key and a private key that are mathematically related to each other. Each device involved in communication will have their own public and private key pair.</p>
+                    <p dir="ltr">The public key is distributed by a device to any other device that it wants to communicate securely with, while the private key is kept a secret. The device sending data will encrypt the data with the public key of the recipient device. Once the data is delivered to the recipient, since the private key is mathematically related to the public key, the data can be decrypted with the recipient’s private key.</p>
+                    <center><img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXemAfIFsak0oD_ArQqJ_3RIwXtGW9w-mil7xo4g0Gq6ucpn-qXDFUgmTfJ0fFoGL6B6NAas509CvovvIHqPUTizW0_pR_4PD4e422EitvggPSZl3CJvtzEo4oKlcHjZeMHQZfXKW_LlJX_Vf6JHGPwld_Vt?key=es8AQUT2E19zUBwvcqtStQ" width="672" height="504" class="align-center" loading="lazy"></center>
+                    <h2>
+                      <br>Cryptographic Failures in Encryption
+                    </h2>
+                    <p dir="ltr">In general, data is processed by computers in “blocks”. Both symmetric and asymmetric encryption modes operate on fixed block sizes defined by the encryption standard used. For example, the&nbsp; <strong>Advanced Encryption Standard</strong> ( <strong>AES</strong>) has a block size of 128 bits. Since a byte is 8 bits, in AES-128, data is split in blocks of 16 bytes each. </p>
+                    <p dir="ltr">For example, the string “telecommunicator” is 16 bytes long. By making conversions between encoding schemes equivalents, “telecommunicator” would produce the following block:</p>
+                    <center><img src="https://www.hackerone.com/sites/default/files/inline-images/Screenshot%202024-10-21%20at%202.21.09%E2%80%AFPM.png" data-entity-uuid="1bd5d99b-0636-4428-abf6-e06bdc84c8af" data-entity-type="file" width="100%" height="auto" class="align-center" loading="lazy"></center>
+                    <p dir="ltr">There are different modes used for block encryption. The two that will be covered are ECB and CBC.</p>
+                    <h3 dir="ltr">Electronic Code Block (ECB)</h3>
+                    <p dir="ltr">This mode encrypts every block individually, meaning identical plaintext produces identical ciphertext. You wouldn’t be able to decrypt the ciphertext without knowing the key, but if the ciphertext of two blocks matches, then the plaintext input must match as well.</p>
+                    <center><img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXdfaZASznxXRN6JdMagB8eNsXaevDD3D1yZaW0BDCJBcKVFhmut9gdn2rmnE436rf5hsQfVbc4E6rp7RBjAmVnLmsMRkMgTNdhp1lLZPrzU7dTieyDTgVMqcmwqWm5AwCBb5ukcOBVeIOMgNWbLbypplSUe?key=es8AQUT2E19zUBwvcqtStQ" width="672" height="504" class="align-center" loading="lazy"></center>
+                    <p>&nbsp;</p>
+                    <p dir="ltr">This creates patterns in the encryption process. This is why the ECB mode is not recommended for use within security contexts. This can be seen visually in images:</p>
+                    <p>&nbsp;</p>
+                    <center><img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXdrH4ubjeRbHp3cmZgviwAAPVsQGcQYAv5G1hfpcYlpn396hQOIK8gP9plwegt3w0-_R0NB9GbTQkVgs0EVFvx9PmKIYO7DPCduD8T-VROAADYhoLsdPob3CRIySd0fiZTIlMcM6jp8B1GNa65mxXMAJshz?key=es8AQUT2E19zUBwvcqtStQ" width="672" height="401" class="align-center" loading="lazy"></center>
+                    <p>&nbsp;</p>
+                    <h3 dir="ltr">Cipher Block Chaining</h3>
+                    <p dir="ltr">XOR is a boolean algebra operator that will return true, if and only if exactly one of your input values is true.</p>
+                    <center><img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXdbIHRXaeGMgUyUnA1JqVF3PXZ7udB0y8ThHFjZunLSaJ4vY1TBHg4W8kP_1oHo_G40PIX1yScblz88O-G9h_nMj6aEPBcktUNSQbH9hYydMVIQ5-ZQjvWAo6TTyxbWiFdbGTC1OswECsFqXG3DiMDNaPw?key=es8AQUT2E19zUBwvcqtStQ" width="672" height="504" class="align-center" loading="lazy"></center>
+                    <p>&nbsp;</p>
+                    <p dir="ltr">This mode solves the issue with ECB by introducing an&nbsp; <strong>Initialization Vector</strong> ( <strong>IV</strong>) block that is used with the&nbsp; <strong>Exclusive OR</strong> ( <strong>⊕</strong>) operation on the first block, so that if the first two input values are ever the same, they will produce a different ciphertext output. </p>
+                    <p dir="ltr">Additionally, the ciphertext output of the first block is then used as input to the second block’s XOR operation. Then the ciphertext output of the second block will be used as input to the third block’s XOR operation and so on and so forth – essentially linking the output of one block to the input of the next.</p>
+                    <center><img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXc6bFtP7gZQd-4cEGEq8HPuM0QQIrqznz9RItnu5QyRdVxk9cbPexwkJifylYffh33t-ukgPiY81yEt6pw5_jG2wOF_qnfxazU2oWaTHV-58r0mDrHM53o4vMP7ZdtV4iHcdd5Qs8R77S8dMqqgzGoeUPX-?key=es8AQUT2E19zUBwvcqtStQ" width="672" height="504" class="align-center" loading="lazy"></center>
+                    <h3 dir="ltr">
+                      <br>Padding
+                    </h3>
+                    <p dir="ltr">AES requires blocks to be 16 bytes, so if a block is less than that, there will need to be&nbsp; <strong>padding</strong>. The preferred padding standard is PKCS #7. In this standard, if you have to pad one byte you pad it with 0x01. If you have to pad two bites you pad it with 0x02 0x02. If you have to pad two bites you pad it with 0x03 0x03 0x03 and so on. Full 16 byte blocks will be followed by a fully padded block. </p>
+                    <p class="text-align-center" dir="ltr">
+                      <strong>Padding examples:</strong>
+                    </p>
+                    <div dir="ltr">
+                      <table style="width: 100%">
+                        <tbody>
+                          <tr>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">01</p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">02</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">02</p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">03</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">03</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">03</p>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <p dir="ltr">Mutating the second to last byte in a block that only has one byte of padding, will not invalidate it (denoted with #):</p>
+                    <div dir="ltr">
+                      <table style="width: 100%">
+                        <tbody>
+                          <tr>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">*</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">#</p>
+                            </td>
+                            <td>
+                              <p class="text-align-center" dir="ltr">01</p>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <p>&nbsp;</p>
+                    <h3 dir="ltr">Padding Oracle Attacks</h3>
+                    <p dir="ltr">An oracle in the time of the ancient Greeks was a person or place that could communicate with the gods. In cryptography, a&nbsp; <strong>padding oracle</strong> is a system that provides information about encrypted data without revealing the encryption key. </p>
+                    <p dir="ltr">Imagine a web server that encrypts cookies before sending them to a client. When the web server receives them back, it will decrypt them in order to process them. Then it will remove the padding. If invalid padding causes an error message or response latency, then you have a padding oracle to work with. For example, a server may send an error message of “AES-128 decryption failed”. This would indicate you exceeded the number of padded bytes. <br>
+                      <br>By modifying the encrypted cookie, you are modifying the ciphertext. By submitting ciphertext to a padding oracle which will either confirm or deny the padding of the plaintext is correct, you can completely decrypt the cookie.
+                    </p>
+                    <h3 dir="ltr">AES CBC Decoding</h3>
+                    <p dir="ltr">Since this attack works on one block at a time, we will view the decoding process for a single block:</p>
+                    <center><img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXezKsfefVaG7J5YShhafUnvYqlFaNTku5w-NEHMW0gjoLIhY7O2KWUhO7wEkbcf2aX7ABptyWVySE6pr_Usymw-ZJYeLn8Ez0BLgHq6ywkOkc_bn40cE6bvlKiR-hpU-95ddwennj_LYK-nhmLvz6gsoRPr?key=es8AQUT2E19zUBwvcqtStQ" width="672" height="504" class="align-center" loading="lazy"></center>
+                    <p dir="ltr">
+                      <br>The decoding process is just the inverse of the encoding process:
+                    </p>
+                    <ol>
+                      <li dir="ltr">The ciphertext is decrypted using the unknown key on the server.</li>
+                      <li dir="ltr">The output is an intermediate value known as a&nbsp; <strong>key stream</strong>. </li>
+                      <li dir="ltr">The key stream value is then XORed with the IV to produce the plaintext.</li>
+                    </ol>
+                    <p dir="ltr">This is what the process in its entirety would look like:</p>
+                    <center><img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXf47X_pfTkivm_3BQeeyWFHpkqBT18_1krziQQRShWcpeEJmjbVQdLF990rZgoIB4487dKb901ArROlBFOiB1D_HuBN5WimGuXGl8KBdKqB6NiVcxf3fp-8kEOagsR7qPSMPNKHWRcvBPZEYgojtUc9Zeo?key=es8AQUT2E19zUBwvcqtStQ" width="672" height="504" class="align-center" loading="lazy"></center>
+                    <p dir="ltr">
+                      <br>But in our case, we don’t know all these values.
+                    </p>
+                    <center><img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXdjWau5srR0ORRWbIxj0muqe8hUQMWHcCs1FMele78WXqCREpnNOjyIGVG0-g9RmbOJ4GiE6D1ezjo-2jqjeYAILRwPUoxapUf8vzhr0hGfWwDkDYpDF-gBqHLCQ3TaEa4RRNs0R2J_W5KlhUWwknsbIH2M?key=es8AQUT2E19zUBwvcqtStQ" width="672" height="504" class="align-center" loading="lazy"></center>
+                    <p>&nbsp;</p>
+                    <p dir="ltr">After zeroing out the IV, the padding oracle will return a padding error. When a valid value for the 16th byte of the IV is discovered, there will be no padding error.</p>
+                    <center><img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXebW5NxDKyqnuUCTobDFYjsZB48-RtsCI3_3gQBTy4C2z9hMSvqXCDL7So0FcSn9tMrsCVHxdBwX21lCV_FCZxawXq8oezWWTQHo5JwYmiLy61h9thhbfm7NDurQdx6ZOV1gkzPSkgdXTTmSkFIPZ2wwopv?key=es8AQUT2E19zUBwvcqtStQ" width="672" height="504" class="align-center" loading="lazy"></center>
+                    <p>&nbsp;</p>
+                    <center><img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXfJdMJtrrD0KuAJReGvB3diQq6Yh6Q24Y8fw7183SVNgckJcSqM8Fgeryni0VK0cSkPupepIUuc4pv0eYl7kyyoEreqoEhGbP6V2tsVWvXnn2M9MrYhtIME1rjDZmWKEO1YgePbafaAXHLTiY-dDQpcC3Jy?key=es8AQUT2E19zUBwvcqtStQ" width="672" height="504" class="align-center" loading="lazy"></center>
+                    <p>&nbsp;</p>
+                    <p dir="ltr">The plaintext either ends with one 01, two 02s, three 03s, and so on. We can assume the plaintext ends with 01 since valid padding was returned with 1f.</p>
+                    <center><p class="text-align-center" dir="ltr">KS16&nbsp; <strong>⊕&nbsp;</strong>1f = 01 </p>
+                    <p class="text-align-center" dir="ltr">KS16&nbsp; <strong>⊕&nbsp;</strong>1f&nbsp; <strong>⊕&nbsp;</strong>1f = 01&nbsp; <strong>⊕&nbsp;</strong>1f </p>
+                    <p class="text-align-center" dir="ltr">KS16&nbsp; <strong>⊕&nbsp;</strong>00 = 01&nbsp; <strong>⊕&nbsp;</strong>1f </p>
+                    <p class="text-align-center" dir="ltr">KS16 = 01&nbsp; <strong>⊕&nbsp;</strong>1f </p>
+                    <p class="text-align-center" dir="ltr">KS16 =1e</p></center>
+                    <p dir="ltr">Since the original 16th byte of the IV was 1b:</p>
+                    <center><p class="text-align-center" dir="ltr">PT16 = 1e&nbsp; <strong>⊕&nbsp;</strong>1b </p>
+                    <p class="text-align-center" dir="ltr">PT16 = 05</p></center>
+                    <p dir="ltr">We have now determined that the 16th byte of the plaintext value is 05.</p>
+                    <center><img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXfV_iKaKMTY4O_A1Nj5hTLQRCxEz-TgMgJ0_0UexJQ5TiBTahrPGilPBLTKlEtPTS1pVO5XOl5lfEx415z8f0FF32svqjoDE37H9BfZXTV5EKj5_ZAZiwQJGfJ8RBbJuCL6pX5w0q1uYuh4atvHXKqlqew?key=es8AQUT2E19zUBwvcqtStQ" width="672" height="504" class="align-center" loading="lazy"></center>
+                    <p dir="ltr">
+                      <br>Now, we need to set the value of the 16th byte of plaintext to 02. XOR against 1e until you get 02. Set the value to the 16th byte of the IV.
+                    </p>
+                    <p class="text-align-center" dir="ltr">1e&nbsp; <strong>⊕&nbsp;</strong>?&nbsp; <strong>⊕&nbsp;</strong>= 02 </p>
+                    <center><img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXdHyJpQVsFW3NWEg_SzjNq6hdDLFqADtMUf7nW6SIRc-eitKeqDqRdi75XwVBnVhKneVrf4Y96bZpbtp_g7ESZrgkYP7-WdYhxJP3IcuG9j3FEWkn2L4PLxdJ5BKr3PnooTksGKD3UcOdN537NSMYCMdD8O?key=es8AQUT2E19zUBwvcqtStQ" width="672" height="504" class="align-center" loading="lazy"></center>
+                    <p>&nbsp;</p>
+                    <p dir="ltr">Next, iterate through all the hex values of the 15th byte of the IV, again until the padding oracle doesn’t return an error.</p>
+                    <center><img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXe0slkNU14FWtZvI8NyObcQMpMl7o7RwuNtuyLVZSCsmbTkgm3Jn0KJIswKxjCt9b0kbIBnznp3O2hRCPaN6CqgbA9JEfk9K_FALeX0VhHSWkJiSCwcb0tkzSsDEpOvkemT1Da6LlQtUt9dl6eL8HHXVc2J?key=es8AQUT2E19zUBwvcqtStQ" width="672" height="504" class="align-center" loading="lazy"></center>
+                    <p>&nbsp;</p>
+                    <p class="text-align-center" dir="ltr">KS15 = c3&nbsp; <strong>⊕&nbsp;</strong>02 </p>
+                    <center><img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXfjq0--9qBbRYL09kIuUFXpY9UDrrG6mPjryRILCk9zKPF4bNAa0CPcYjScK8TVeb1Cuc6mRzdy49hQ4r2As9_J77cGOo_l9gPNvhTLDZRG23M-iR7916c7F0oWLZwPGG8xbm0yEJBIx5eTOyTUt5MzMTrB?key=es8AQUT2E19zUBwvcqtStQ" width="672" height="504" class="align-center" loading="lazy"></center>
+                    <p>&nbsp;</p>
+                    <p dir="ltr">Since the original 15th byte of the IV was c4:</p>
+                    <p class="text-align-center" dir="ltr">PT15 = c1&nbsp; <strong>⊕&nbsp;</strong>c4 </p>
+                    <p class="text-align-center" dir="ltr">PT15 = 05</p>
+                    <p dir="ltr">This checks out because there will be five 05 bytes as padding. This process is repeated until the entire plaintext value that the server receives is discovered.</p>
+                    <p dir="ltr">
+                      <a href="https://paddingoracle.github.io/" target="_blank">Try a padding oracle attack yourself here.</a>&nbsp;
+                    </p>
+                    <h3 dir="ltr">PortSwigger Lab: Authentication Bypass Via Encryption Oracle</h3>
+                    <p dir="ltr">PortSwigger provides an exercise in their academy in which you have to utilize an encryption oracle. Below are step-by-step instructions on how to solve the lab.</p>
+                    <p>1. Log in using the provided credentials, ensuring to select the ‘Stay logged in’ option.</p>
+                    <p>2. The simulated website is a blogging site in which you can comment on posts. Submitting a comment with an invalid email address results in an error message: “Invalid email address: [email]”</p>
+                    <center><img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXcC5jT2Q_YNqISX2GaZc-sGMkSd-wU7QjZ-vxNsAWgnnnDkNdbYQkFBHCca2sVni0QAjDnPQ2wN-gW4_tkvBfcz3mJPn-Xxof47qDjYcCWjn7p5KQIcsf7Hf8KAIuRC6LyomukhYLwRLlhwdb94C3ECdyxZ?key=es8AQUT2E19zUBwvcqtStQ" width="480" height="370" class="align-center" loading="lazy"></center>
+                    <p>&nbsp;</p>
+                    <p>3. In BurpSuite’s HTTP history, select the POST /post/comment request and inspect the response. The server set a ‘notification’ cookie. Inspect the subsequent response to the GET request generated by the 302 redirect. In the header of the HTML file, is a class attribute of “notification-header”. Underneath this is the error message received from submitting an invalid email address.</p>
+                    <center><img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXdyqYe9qyOa2efqK0YiXvd9G0fZbCO23oOrb9VaK7FuAuMDFFN1Q68DELrcPmkdttE4eSufKf1EH8Js3VqeA5zhQB2S0XEYUeQODEM_u6swwJZDuTQvmxPzO6sipGni6RTT2zpp4iHjX9nM6YgKH0d8USyP?key=es8AQUT2E19zUBwvcqtStQ" width="480" height="32" class="align-center" loading="lazy"></center>
+                    <p>&nbsp;</p>
+                    <p>4. Back in the POST /post/comment request, copy the value of the ‘stay-logged-in’ cookie and paste it as the value of the ‘notification’ cookie in the GET /post?postId=[blog-number], then send the request. Now in the response body, ‘wiener:[timestamp]’. It is now confirmed that the POST request can be used to encrypt data via the email parameter and the GET request can decrypt the data. This will serve as your oracle.</p>
+                    <center><img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXchTrPohlUOugCSAyTZYXMAu-Oi5GX3S8QXmNWltD7rICxob7w38Av1d_QxxNnXLxsv1BgUZExdMasfRmb8qz6vlFyEzwx8w9deLSECSlU6o7rZELZWiCP9pcDZt7-DXnA5GR_mvrIGL1jpdF-CdooMteU?key=es8AQUT2E19zUBwvcqtStQ" width="480" height="51" class="align-center" loading="lazy"></center>
+                    <p>&nbsp;</p>
+                    <p>5. Submit ‘administrator:[timestamp]’ as the value of the email parameter. In the response to this request, again copy the value of the ‘notification’ cookie and decrypt it with the GET request. Now the error message is: “Invalid email address: administrator:[timestamp]”.</p>
+                    <p>6. Return to the POST request and send the value of the ‘notification’ cookie to Decoder. Decode as URL and decode as Base64. Since ‘Invalid email address: ‘ is 23 bytes long, remove the first 23 bytes. Reencode the cookie.</p>
+                    <center><img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXflEKdFq9BJZ6OPzm_FLQv-2GrpAlvuzfN2gcgvBpsIxwc_Sbps5bm1Lug8GERyktchgkI-zkdFTyPZB1IBP7_pcfwfg_cjt8rQXzMUjCQqSZNfE1cx5I0-xgMUgEDEfZWqA4IbRf0kU_fOQeTDKCga-MA?key=es8AQUT2E19zUBwvcqtStQ" width="480" height="489" class="align-center" loading="lazy"></center>
+                    <p>&nbsp;</p>
+                    <p>7. Once again, decode the cookie using the GET request. You will be met with a 500 server error response. However, there is a verbose decryption error message of: “Input length must be multiple of 16 when decrypting with padded cipher”</p>
+                    <center><img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXfX-yt8vLfHhPhpZbguxZ9B_qQS-KnaR7VGjxL_HinHtEygaSal46zAOopd26SQ1EwWi1EdZiEd-7RF3-1g6ibBpNetPx72JtAUz7BqioUbKYiT_LQyeGfN8B1Lik2QmMa6e8_mwicSRPo-W_IeFmu80HVN?key=es8AQUT2E19zUBwvcqtStQ" width="480" height="82" class="align-center" loading="lazy"></center>
+                    <p>&nbsp;</p>
+                    <p>8. In the POST request, prefix ‘administrator:[timestamp]’ with 9 bytes to satisfy the 16 byte block requirement. Send the request to get the new value of the ‘notification’ cookie from the response. Send this value back to Decoder, decode it and then delete the first two blocks. Reencode and now use the value in the GET request to decrypt it. You have successfully forged an administrator cookie for use as the value to the ‘stay-logged-in’ cookie.</p>
+                    <center><img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXd03OBDdIvJd0znkewke9AlS2WJxEND8dJvF1z_KFZgyfILiyoQid-78ymxi3VagLCTc76-B8oLzA0S63Q0ACOYT5_y7hTe2VWtjlkjo-JfqI_0DgtzanEC8FN88c3eGbUbT8gBp9DtiyNm3J0MWzfYwFSj?key=es8AQUT2E19zUBwvcqtStQ" width="480" height="43" class="align-center" loading="lazy"></center>
+                    <p>&nbsp;</p>
+                    <p>9. By using this administrator token and deleting the ‘session’ cookie in its entirety as to not conflict with the session state. You are now able to gain unauthorized access to the administrator panel and execute operations with this privileged role.</p>
+                    <center><img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXcAVQUAfQ1uJy8bx8c3xucJOYNB3oOIu7Pnq_mZAOaSaKc_sICQvlad2scR_jGZgm4vhtTozMFZX74b_Q6dy55q_Zl-4iutJqkjYOiX1aE1lNi-qezh-8YZ59Z48-rQVKWZLkTJ1yUaJeCaGF3ewhfpoJ6j?key=es8AQUT2E19zUBwvcqtStQ" width="480" height="175" class="align-center" loading="lazy"></center>
+                    <p>&nbsp;</p>
+                    <h2 dir="ltr">Hashing</h2>
+                    <p dir="ltr">In addition to encryption and decryption, cryptography also encompasses&nbsp; <strong>hashing</strong>. Hashing is a process that converts data into a fixed-length string, known as a&nbsp; <strong>hash digest</strong>, that acts as a unique identifier of the original data. Hash digests are used for security measures such as integrity checks, digital signatures, and message authentication. While both encryption and hash functions render data unrecognizable, they differ in a major way – due to the algorithms used, in hashing the process is irreversible. However, the algorithms used will always produce the same output for the same input. </p>
+                    <p dir="ltr">For example, the string “Hello, World!” when hashed using the&nbsp; <strong>Message Digest 5</strong> ( <strong>MD5</strong>) algorithm, returns the following hash value: </p>
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td>65a8e27d8879283831b664bd8b7f0ad4</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <p dir="ltr">In hashing, even the slightest variations to an input value result in a completely different output. To demonstrate, examine the hash value of “Hello, world!” (note the lowercase "w"):</p>
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td>6cd3556deb0da54bca060b4c39479839</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <p dir="ltr">Since MD5 uses 128-bit encryption, the number of possible unique combinations is&nbsp;2128 which amounts to 340,282,366,920,938,463,463,374,607,431,768,211,456.</p>
+                    <h3 dir="ltr">Cryptographic Failures in Hashing</h3>
+                    <p dir="ltr">Though the number of unique combinations provided by MD5 is vast, what are referred to as “collisions” have been discovered. A collision occurs when two different input values produce the same hash digest. A famous probability theory phenomenon known as the&nbsp; <a href="https://auth0.com/blog/birthday-attacks-collisions-and-password-strength/" target="_blank">Birthday Problem</a> illustrates that there is actually a 50% chance of finding an MD5 collision after&nbsp;264 operations. MD5 was also once thought to be secure against preimage attacks, meaning that even if someone has the hash digest, they cannot easily work backward to find the original input. Though, weaknesses have been found that allow attackers to reverse-engineer hash digests. These reasons are why MD5 is no longer recommended for use within security contexts. </p>
+                    <h4>Rainbow Table Attacks</h4>
+                    <p dir="ltr">When you create a password, it is often stored in a database as a hash rather than its plaintext value. This acts as a security measure in the event the database is breached. Again, due to the fact that a hashing algorithm will always produce the same output for the same input, there is a much easier way to discover the corresponding plaintext equivalent than attempting either a collision or a preimage attack, thanks to&nbsp; <strong>rainbow tables</strong>. </p>
+                    <p dir="ltr">Rainbow tables are precomputed lists of hash digests and their plaintext equivalents. If a database of hashed passwords is obtained, you could simply use a rainbow table or the same hashing algorithm used to generate a large number of hash digests by supplying a wordlist. These output values can then be compared against those in the database until a match is discovered.</p>
+                    <p dir="ltr">Additionally, when compared to dictionary or brute force attacks, rainbow table attacks allow for a higher rate of matching attempts due to the fact that is not subjected to the asynchronous nature of awaiting a response to an HTTP request – rainbow attacks are only limited by the processing power of the device it is carried out on.</p>
+                    <p dir="ltr">There are even websites available, such as&nbsp; <a href="https://crackstation.net/" target="_blank">CrackStation,</a>&nbsp;where you can supply a hash value, which will be checked against their collection of rainbow tables to find a matching plaintext value. CrackStation currently boasts a 15-billion-entry rainbow table for MD5 and SHA1 hashes as well as a 1.5 billion-entry table for other miscellaneous hash algorithms. However, if a salt is being used, this kind of attack can be thwarted. </p>
+                    <h2>Conclusion</h2>
+                    <p>To prevent cryptographic failures, organizations should take proactive steps in managing cryptography effectively.</p>
+                  
+                    <ul>
+                      <li>Avoid deprecated algorithms and protocols.</li>
+                      <li>Ensure proper key management practices are in place.</li>
+                      <li>Regularly audit encryption implementations.</li>
+                    </ul>
+                  
+                    <h3>Steps to Mitigate Cryptographic Failures</h3>
+                    <ol>
+                      <li>Identify weak or outdated encryption methods.</li>
+                      <li>Implement modern cryptographic standards, such as AES-256.</li>
+                      <li>Train developers on best practices for secure coding.</li>
+                      <li>Monitor systems for potential vulnerabilities continuously.</li>
+                    </ol>
+            </div>
+            <hr>
+            <footer style="padding-bottom: 50px; padding-top: 30px;">
+                <div>
+                    <h3>Services</h3>
+                    <a href="#" class="footerLink">AI Security and Safety</a><br>
+                    <a href="#" class="footerLink">Cloud Security</a><br>
+                    <a href="#" class="footerLink">Application Security</a><br>
+                    <a href="#" class="footerLink">Vulnerability Management</a><br>
+                </div>
+                <div>
+                    <h3>Partners</h3>
+                    <a href="https://aws.amazon.com/" class="footerLink">AWS</a><br>
+                    <a href="https://www.ibm.com/in-en" class="footerLink">IBM</a><br>
+                    <a href="https://www.microsoft.com/en-in" class="footerLink">Microsoft</a><br>
+                    <a href="#" class="footerLink">Gada Electronics</a><br>
+                </div>
+                <div>
+                    <h3>Resources</h3>
+                    <a href="#" class="footerLink">Resource Center</a><br>
+                    <a href="#" class="footerLink">Events</a><br>
+                    <a href="#" class="footerLink">Documentation</a><br>
+                </div>
+                <div>
+                    <h3>Company</h3>
+                    <a href="#" class="footerLink">About Us</a><br>
+                    <a href="#" class="footerLink">Career</a><br>
+                    <a href="#" class="footerLink">Customer Service</a><br>
+                    <a href="./contactus.html" class="footerLink">Contact Us</a><br>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>

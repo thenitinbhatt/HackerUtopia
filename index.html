@@ -1,0 +1,236 @@
+<html>
+    <head>
+        <title>HackerUtopia</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <style>
+            body {
+                font-family: monospace;
+                background-color: black;
+                color: white;
+                font-size: 16px;}
+            a {text-decoration: none;}
+            .headerLogo {
+                font-family: "Major Mono Display", monospace;
+                font-weight: 400;
+                font-style: normal;}
+            #posts {
+                display: grid;
+                grid-template-columns: 2fr 1fr;
+                grid-template-rows: 1fr ;
+                grid-column-gap: 20px;
+                grid-row-gap: 20px;}
+            #postsMain {
+                padding: 6px 10px;}
+            div.post {
+                display: grid;
+                grid-template-columns: 1fr 2fr;
+                grid-template-rows: 1fr;
+                grid-column-gap: 20px;
+                grid-row-gap: 20px;
+                margin-bottom: 20px;}
+            div.comment {
+                display: grid;
+                grid-template-columns: 1fr 6fr;
+                grid-template-rows: 1fr;
+                grid-column-gap: 0px;
+                margin-bottom: 20px;}
+            footer {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                grid-template-rows: 1fr;
+                grid-column-gap: 15px;}
+            footer {text-align: center;}
+            .footerLink, .navLink {color: #fff;}
+            .navLink {padding: 8px 8px;}
+            .navLink:hover {background-color: #333;}
+            #promotion {
+                border: 1px solid #ddd;
+                padding: 15px;
+                margin-top: 28px;
+                text-align: center;
+                position: relative;
+            }
+            @keyframes blink {
+                0% {opacity: 1;}
+                50% {opacity: 0;}
+                100% {opacity: 1;}}
+            blink {
+                text-align: center;
+                animation: blink 1.5s infinite;}
+            .floatingStar {
+                position: absolute;
+                top: -28;
+                left: -28;
+                background-color: #f00;
+                color: yellow;
+                padding: 12px;
+                border-radius: 50%;
+                transform: rotate(-15deg);
+                transform-origin: center center;
+            }
+        </style>
+        <center><h1 class="headerLogo">HackerUtopia</h1></center>
+        <div style="margin: 10 200  0; font-size: 18px;">
+                <a href="./index.html" class="navLink">Home</a>
+                <a href="#" class="navLink">About Us</a>
+                <a href="#" class="navLink">Career</a>
+                <a href="./contactus.html" class="navLink">Contact Us</a>
+        </div>
+        <hr margin="0">
+        <marquee>Welcome to the Official site of "HackerUtopia".</marquee>
+        <br>
+        <div style="margin: 0 200;">
+            <div id="promotion">
+                <div><h2>Certified Ethical Hacker Course in Partnership with IBM</h2>
+                Get the course now for just <b>₹1,99,999</b> <s style="color: #888">₹3,99,999</s>
+                <blink><div class="floatingStar">Limited<br>Time Offer</div></blink>
+            </div>
+            </div>
+            <div id="posts" style="margin-top: 10px">
+                <div id="postsMain">
+                    <h2>Recent Posts</h2>
+                    <div class="post">
+                        <div style="position: relative;">
+                            <img src="https://www.hackerone.com/sites/default/files/styles/card_default/public/2024-10/cryptographic%20failures%20blog%20header%402x.png.webp?itok=TX8XWNN1" alt="xyz" width="100%">
+                            <span style="position: absolute; top: 6px; left: 6px; color: black; background-color: yellow; padding: 1px 6px;">NEW!</span>
+                        </div>
+                        <div>
+                            <h2 style="margin: 0">OWASP Top 10: The Risk of Cryptographic Failures</h2>
+                            <span style="color: gray">Vulnerability Management<br></span>
+                            <span>Oct 20, 2024<br>Cryptographic failures: what are they and why are they considered so concerning by the OWASP Top 10?<br></span>
+                            <a href="./post001.html" style="color: yellow;">Read More »</a>
+                        </div>
+                    </div>
+                    <div class="post">
+                        <div style="position: relative;">
+                            <img src="https://www.hackerone.com/sites/default/files/styles/card_default/public/2024-10/RCE%20imagemagick%20blog%20header%402x.png.webp?itok=hiNbU907" alt="xyz" width="100%">
+                            <span style="position: absolute; top: 6px; left: 6px; color: black; background-color: yellow; padding: 1px 6px;">NEW!</span>
+                        </div>
+                        <div>
+                            <h2 style="margin: 0">Vulnerability Deep Dive: Gaining RCE Through ImageMagick With Frans Rosen</h2>
+                            <span style="color: gray">Vulnerability Management<br></span>
+                            <span>Oct 20, 2024<br>The file upload vulnerability type is as broad in scope as the number of different file types. These...<br></span>
+                            <a href="./post001.html" style="color: yellow;">Read More »</a>
+                        </div>
+                    </div>
+                    <div class="post">
+                        <div style="position: relative;">
+                            <img src="https://www.hackerone.com/sites/default/files/styles/card_default/public/2024-09/Broken%20access%20controls%20blog%20header%402x.png.webp?itok=ldsE5gkq" alt="xyz" width="100%">
+                        </div>
+                        <div>
+                            <h2 style="margin: 0">How To Find Broken Access Control Vulnerabilities in the Wild</h2>
+                            <span style="color: gray">Vulnerability Management<br></span>
+                            <span>Oct 20, 2024<br>Learn the ins and outs of broken access control vulnerabilities and how to find them in your security research.<br></span>
+                            <a href="./post001.html" style="color: yellow;">Read More »</a>
+                        </div>
+                    </div>
+                    <div class="post">
+                        <div style="position: relative;">
+                            <img src="https://www.hackerone.com/sites/default/files/styles/card_default/public/2024-09/subdomain%20takeovers%20blog%20header%402x.png.webp?itok=EY5pYk0X" alt="xyz" width="100%">
+                        </div>
+                        <div>
+                            <h2 style="margin: 0">A Guide To Subdomain Takeovers 2.0</h2>
+                            <span style="color: gray">Vulnerability Management<br></span>
+                            <span>Oct 20, 2024<br>Learn the ins and outs of understanding subdomain configurations with current resources and tools from an expert<br></span>
+                            <a href="./post001.html" style="color: yellow;">Read More »</a>
+                        </div>
+                    </div>
+                    <div class="post">
+                        <div style="position: relative;">
+                            <img src="https://www.hackerone.com/sites/default/files/styles/card_default/public/2024-07/Authentication%20bypass%20blog%20header%402x.png.webp?itok=1tRR4CcL" alt="xyz" width="100%">
+                        </div>
+                        <div>
+                            <h2 style="margin: 0">How a GraphQL Bug Resulted in Authentication Bypass</h2>
+                            <span style="color: gray">Vulnerability Management<br></span>
+                            <span>Oct 20, 2024<br>Experienced security researchers explain how a GraphQL bug resulted in authentication bypass — and how to...<br></span>
+                            <a href="./post001.html" style="color: yellow;">Read More »</a>
+                        </div>
+                    </div>
+                    <div class="post">
+                        <div style="position: relative;">
+                            <img src="https://www.hackerone.com/sites/default/files/styles/card_default/public/2024-06/How%20to%20find%20XSS%20blog%402x.png.webp?itok=TBRkxiCf" alt="xyz" width="100%">
+                        </div>
+                        <div>
+                            <h2 style="margin: 0">How to Find XSS</h2>
+                            <span style="color: gray">Vulnerability Management<br></span>
+                            <span>June 25th, 2024<br>Security researcher Haoxi Tan breaks down the best practices and tools for finding the different types of XSS...<br></span>
+                            <a href="./post001.html" style="color: yellow;">Read More »</a>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div>
+                    <h2>Top Comments</h2>
+                    <div id="topComments">
+                        <div class="comment">
+                            <div><img src="C:\\Users\\DELL\\Pictures\\pfp.jpg" alt="pfp" style="border-radius: 50%; width: 50px; height: 50px;"></div>
+                            <div>
+                                <h3 style="margin: 0;">Nitin Bhatt</h3>
+                                <div>This is Test Comment #1.</div>
+                            </div>
+                        </div>
+                        <div class="comment">
+                            <div><img src="C:\\Users\\DELL\\Pictures\\pfp.jpg" alt="pfp" style="border-radius: 50%; width: 50px; height: 50px;"></div>
+                            <div>
+                                <h3 style="margin: 0;">Nitin Bhatt</h3>
+                                <div>This is Test Comment #2.</div>
+                            </div>
+                        </div>
+                        <div class="comment">
+                            <div><img src="C:\\Users\\DELL\\Pictures\\pfp.jpg" alt="pfp" style="border-radius: 50%; width: 50px; height: 50px;"></div>
+                            <div>
+                                <h3 style="margin: 0;">Nitin Bhatt</h3>
+                                <div>This is super duper ultra pro max long Test Comment #1. Please pretend that this is very long.</div>
+                            </div>
+                        </div>
+                        <div class="comment">
+                            <div><img src="C:\\Users\\DELL\\Pictures\\pfp.jpg" alt="pfp" style="border-radius: 50%; width: 50px; height: 50px;"></div>
+                            <div>
+                                <h3 style="margin: 0;">Nitin Bhatt</h3>
+                                <div>This is a not so long Test Comment #1.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <h2>Categories</h2>
+                    <ul id="categories">
+                        <li class="category">Vulnerability Management (5)</li>
+                        <li class="category">HackerUtopia Community Blog (7)</li>
+                    </ul>
+                </div></div>
+            <hr>
+            <footer style="padding-bottom: 50px; padding-top: 30px;">
+                <div>
+                    <h3>Services</h3>
+                    <a href="#" class="footerLink">AI Security and Safety</a><br>
+                    <a href="#" class="footerLink">Cloud Security</a><br>
+                    <a href="#" class="footerLink">Application Security</a><br>
+                    <a href="#" class="footerLink">Vulnerability Management</a><br>
+                </div>
+                <div>
+                    <h3>Partners</h3>
+                    <a href="https://aws.amazon.com/" class="footerLink">AWS</a><br>
+                    <a href="https://www.ibm.com/in-en" class="footerLink">IBM</a><br>
+                    <a href="https://www.microsoft.com/en-in" class="footerLink">Microsoft</a><br>
+                    <a href="#" class="footerLink">Gada Electronics</a><br>
+                </div>
+                <div>
+                    <h3>Resources</h3>
+                    <a href="#" class="footerLink">Resource Center</a><br>
+                    <a href="#" class="footerLink">Events</a><br>
+                    <a href="#" class="footerLink">Documentation</a><br>
+                </div>
+                <div>
+                    <h3>Company</h3>
+                    <a href="#" class="footerLink">About Us</a><br>
+                    <a href="#" class="footerLink">Career</a><br>
+                    <a href="#" class="footerLink">Customer Service</a><br>
+                    <a href="./contactus.html" class="footerLink">Contact Us</a><br>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>

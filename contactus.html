@@ -1,0 +1,192 @@
+<html>
+    <head>
+        <title>Contact Us - HackerUtopia</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <style>
+            body {
+                font-family: monospace;
+                background-color: black;
+                color: white;
+                font-size: 16px;
+                background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("C:\\Users\\DELL\\Downloads\\JS\\[fetchpik.com]-high-BuqLrvVoPm.jpg");
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+            a {text-decoration: none;}
+            .headerLogo {
+                font-family: "Major Mono Display", monospace;
+                font-weight: 400;
+                font-style: normal;}
+            #posts {
+                display: grid;
+                grid-template-columns: 2fr 1fr;
+                grid-template-rows: 1fr ;
+                grid-column-gap: 20px;
+                grid-row-gap: 20px;}
+            #postsMain {
+                padding: 6px 10px;}
+            div.post {
+                display: grid;
+                grid-template-columns: 1fr 3fr;
+                grid-template-rows: 1fr;
+                grid-column-gap: 20px;
+                grid-row-gap: 20px;
+                margin-bottom: 20px;}
+            div.comment {
+                display: grid;
+                grid-template-columns: 1fr 6fr;
+                grid-template-rows: 1fr;
+                grid-column-gap: 0px;
+                margin-bottom: 20px;}
+            footer {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                grid-template-rows: 1fr;
+                grid-column-gap: 15px;}
+            footer {text-align: center;}
+            .footerLink, .navLink {color: #fff;}
+            .navLink {padding: 8px 8px;}
+            .navLink:hover {background-color: #333;}
+            #promotion {
+                border: 1px solid #ddd;
+                padding: 15px;
+                margin-top: 28px;
+                text-align: center;
+                position: relative;
+            }
+            @keyframes blink {
+                0% {opacity: 1;}
+                50% {opacity: 0;}
+                100% {opacity: 1;}}
+            blink {
+                text-align: center;
+                animation: blink 1.5s infinite;}
+            .floatingStar {
+                position: absolute;
+                top: -28;
+                left: -28;
+                background-color: #f00;
+                color: yellow;
+                padding: 12px;
+                border-radius: 50%;
+                transform: rotate(-15deg);
+                transform-origin: center center;
+            }
+            .contact-form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .contact-form h2 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .contact-form label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .contact-form textarea {
+      resize: vertical;
+      height: 100px;
+    }
+
+    .contact-form button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .contact-form button:hover {
+      background-color: #45a049;
+    }
+        </style>
+        <center><h1 class="headerLogo">HackerUtopia</h1></center>
+        <div style="margin: 10 200  0; font-size: 18px;">
+                <a href="./index.html" class="navLink">Home</a>
+                <a href="#" class="navLink">About Us</a>
+                <a href="#" class="navLink">Career</a>
+                <a href="./contactus.html" class="navLink">Contact Us</a>
+        </div>
+        <hr margin="0">
+        <marquee>Welcome to the Official site of "HackerUtopia".</marquee>
+        <br>
+        <div style="margin: 0 200;">
+            <div id="poss" style="margin-top: 10px; margin-bottom: 20px;">
+                <center><div class="contact-form">
+                    <h2 style="color: #000">Contact Us</h2>
+                    <form action="https://example.com/submit" method="POST">
+                      <label for="name">Name:</label>
+                      <input type="text" id="name" name="name" placeholder="Your Name" required>
+                
+                      <label for="email">Email:</label>
+                      <input type="email" id="email" name="email" placeholder="Your Email" required>
+                
+                      <label for="subject">Subject:</label>
+                      <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                
+                      <label for="message">Message:</label>
+                      <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+                
+                      <button type="submit">Send Message</button>
+                    </form>
+                  </div></center>
+            </div>
+            <hr>
+            <footer style="padding-bottom: 50px; padding-top: 30px;">
+                <div>
+                    <h3>Services</h3>
+                    <a href="#" class="footerLink">AI Security and Safety</a><br>
+                    <a href="#" class="footerLink">Cloud Security</a><br>
+                    <a href="#" class="footerLink">Application Security</a><br>
+                    <a href="#" class="footerLink">Vulnerability Management</a><br>
+                </div>
+                <div>
+                    <h3>Partners</h3>
+                    <a href="https://aws.amazon.com/" class="footerLink">AWS</a><br>
+                    <a href="https://www.ibm.com/in-en" class="footerLink">IBM</a><br>
+                    <a href="https://www.microsoft.com/en-in" class="footerLink">Microsoft</a><br>
+                    <a href="#" class="footerLink">Gada Electronics</a><br>
+                </div>
+                <div>
+                    <h3>Resources</h3>
+                    <a href="#" class="footerLink">Resource Center</a><br>
+                    <a href="#" class="footerLink">Events</a><br>
+                    <a href="#" class="footerLink">Documentation</a><br>
+                </div>
+                <div>
+                    <h3>Company</h3>
+                    <a href="#" class="footerLink">About Us</a><br>
+                    <a href="#" class="footerLink">Career</a><br>
+                    <a href="#" class="footerLink">Customer Service</a><br>
+                    <a href="./contactus.html" class="footerLink">Contact Us</a><br>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>
